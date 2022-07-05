@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -43,7 +44,12 @@ class WeatherListFragment: Fragment() {
     private fun renderData (appState: AppState){
         when (appState){
 
-            is AppState.Error -> TODO()
+            is AppState.Error -> {
+
+                    Toast.makeText(requireActivity(),"Что-то пошло не так",Toast.LENGTH_SHORT).show()
+
+
+            }
             AppState.Loading -> TODO()
             is AppState.Success -> {
                 val result=appState.weatherData
