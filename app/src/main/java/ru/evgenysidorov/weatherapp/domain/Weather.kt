@@ -2,13 +2,13 @@ package ru.evgenysidorov.weatherapp.domain
 
 data class Weather (
     val city:City = getDefaultCity(),
-    val temperature: Int =0,
-    val feelsLike: Int=0
+    val temperature: Int =20,
+    val feelsLike: Int=20
 )
 
 data class City(
-    val city:String,
+    val name:String,
     val lat: Double,
     val lon: Double
 )
-fun getDefaultCity()= City("Москва",55.54486,37.644546)
+fun getDefaultCity()= City("Пермь",55.54486,37.644546)

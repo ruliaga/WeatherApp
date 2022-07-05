@@ -33,19 +33,26 @@ class WeatherListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(WeatherListViewModel::class.java)
-        viewModel.liveData.observe(viewLifecycleOwner,  object : Observer<AppState>{
-            override fun onChanged(t: AppState?) {
-               Toast.makeText(requireContext(),"Работает $t",Toast.LENGTH_SHORT).show()
+        viewModel.getLiveData().observe(viewLifecycleOwner,  object : Observer<AppState>{
+            override fun onChanged(t: AppState) {
+               renderData(t)
             }
         })
         viewModel.sentRequest()
     }
-    private fun renderDate (appState: AppState){
+    private fun renderData (appState: AppState){
         when (appState){
 
             is AppState.Error -> TODO()
             AppState.Loading -> TODO()
-            is AppState.Success -> TODO()
+            is AppState.Success -> {
+                val result=appState.weatherData
+                binding.cityName.text=result.city.name
+                binding.temperature.text= result.temperature.toString()
+                binding.feelslikeLabel.text=result.feelsLike.toString()
+                binding.coordinates.text="${result.city.lat}/${result.city.lon}"
+
+            }
         }
     }
 }
